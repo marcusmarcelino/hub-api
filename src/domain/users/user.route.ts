@@ -4,6 +4,7 @@ import { z } from 'zod'
 
 async function userRoutes(server: FastifyInstance) {
 	const prisma = new PrismaClient()
+
 	server.post('/users', async (request, reply) => {
 		const createUserSchema = z.object({
 			name: z.string(),
@@ -19,6 +20,11 @@ async function userRoutes(server: FastifyInstance) {
 		})
 
 		return reply.status(201).send({ message: 'Create user with success' })
+	})
+
+	server.get('/users', async () => {
+		const users = await prisma.users.findMany()
+		return { users }
 	})
 }
 

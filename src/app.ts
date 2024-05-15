@@ -1,17 +1,14 @@
-import buildServer from './server'
+import Fastify, { type FastifyReply, type FastifyRequest } from 'fastify'
+import userRoutes from './domain/users/user.route'
 
-const server = buildServer()
-async function main() {
-	try {
-		await server.listen({
-			host: '0.0.0.0',
-			port: process.env.PORT ? Number(process.env.PORT) : 3333,
-		})
+function buildApp() {
+	const server = Fastify()
 
-		console.log('HTTP Server started - http://localhost:3000')
-	} catch (e) {
-		console.log(`HTTP Server stoped ERROR: ${e}`)
-	}
+	server.get('/healthcheck', async () => ({ status: 'OK' }))
+
+	server.register(userRoutes, { prefix: 'api/users' })
+
+	return server
 }
 
-main()
+export default buildApp
