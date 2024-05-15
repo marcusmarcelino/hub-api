@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: hub_api
+    shm_size: 64g
+    build:
+      context: .
+      dockerfile: Dockerfile-postgres.yaml
+    environment:
+      - POSTGRES_DB=hubapi
+      - POSTGRES_USER=hubapi
+      - POSTGRES_PASSWORD=hubapi
+    volumes: -./database:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
