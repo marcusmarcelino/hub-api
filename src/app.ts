@@ -4,8 +4,7 @@ import userRoutes from './domain/users/user.route'
 function buildApp() {
 	const server = Fastify()
 
-	server.get('/healthcheck', async () => ({ status: 'OK' }))
-
+	server.get('/checkserver', async () => ({ status: 'OK' }))
 	server.register(userRoutes, { prefix: 'api/users' })
 
 	return server
