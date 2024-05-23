@@ -12,7 +12,7 @@ async function main() {
 		console.log('HTTP Server started - http://localhost:3000')
 	} catch (e) {
 		console.log(`HTTP Server stoped ERROR: ${e}`)
-		process.exit(1)
+		// process.exit(1)
 	}
 }
 

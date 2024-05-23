@@ -5,6 +5,7 @@ function buildApp() {
 	const server = Fastify()
 
 	server.get('/checkserver', async () => ({ status: 'OK' }))
+
 	server.register(userRoutes, { prefix: 'api/users' })
 
 	return server
